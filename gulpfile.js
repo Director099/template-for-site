@@ -16,21 +16,23 @@ var svgmin = require("gulp-svgmin"); // свг минификация
 var run = require("run-sequence"); //запуск плагинов очередью
 var del = require("del"); //удаление ненужных файлов
 
-// gulp.task("clean", function() {
-//   return del("build");
-// });
+gulp.task("clean", function() {
+  return del("build");
+});
 
-// gulp.task("copy", function() {
-//   return gulp.src([
-//       "fonts/**/*.{woff,woff2}",
-//       "img/**",
-//       "js/**",
-//       "*.html"
-//     ], {
-//       base: "."
-//     })
-//     .pipe(gulp.dest("build"));
-// });
+gulp.task("copy", function() {
+  return gulp.src([
+      "fonts/**",
+      "img/**",
+      "js/**",
+      "*.html",
+      "bootstrap/**",
+      "*.css"       
+    ], {
+      base: "."
+    })
+    .pipe(gulp.dest("build"));
+});
 
 gulp.task("style", function() {
   gulp.src("less/style.less")
@@ -72,8 +74,8 @@ gulp.task("symbols", function() {
 
 gulp.task("build", function(fn) {
   run(
-    // "clean",
-    // "copy",
+    "clean",
+    "copy",
     "style",
     "images",
     "symbols",
