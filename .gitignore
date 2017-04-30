@@ -1,0 +1,7 @@
+.DS_Store
+*.ai
+*.log
+*.pdf
+*.psd
+node_modules/
+build/
