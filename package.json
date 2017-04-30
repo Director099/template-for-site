@@ -4,20 +4,21 @@
   "description": "Проект с использованием gulp",
   "author": "",
   "main": "index.js",
-  "dependencies": {
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.0.0"
-  },
   "devDependencies": {
     "browser-sync": "^2.18.5",
+    "css-mqpacker": "^5.0.1",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-csso": "^2.0.0",
     "gulp-imagemin": "^3.1.1",
+    "gulp-less": "^3.3.0",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-svgmin": "^1.2.3",
     "gulp-svgstore": "^6.1.0",
+    //"pixel-glass": "^1.0.13", поможет вам проверить насколько разметка страницы соответствует макету
     "run-sequence": "^1.2.2"
   },
   "scripts": {

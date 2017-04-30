@@ -2,7 +2,7 @@
 
 var gulp = require("gulp");
 var sass = require("gulp-sass"); //препроцессор sass
-var less = require('gulp-less'); //препроцессор less 
+var less = require('gulp-less'); //препроцессор less
 var plumber = require("gulp-plumber"); //плагин чтоб не слетело во время ошибок
 var postcss = require("gulp-postcss"); // плагин для автопрефикса, минифик
 var autoprefixer = require("autoprefixer"); // автопрефикс для браузеров
@@ -26,8 +26,12 @@ gulp.task("copy", function() {
       "img/**",
       "js/**",
       "*.html",
-      "bootstrap/**",
-      "*.css"       
+      "*.css",
+      "libr/bootstrap/dist/css/bootstrap.min.css",
+      "libr/bootstrap/dist/js/bootstrap.min.js",
+      "libr/jquery/dist/jquery.min.js",
+      "libr/jquery-migrate/jquery-migrate.min.js",
+      "libr/font-awesome/css/font-awesome.min.css"
     ], {
       base: "."
     })
