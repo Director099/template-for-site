@@ -27,11 +27,11 @@ gulp.task("copy", function() {
       "js/**",
       "*.html",
       "*.css",
-      "libr/bootstrap/dist/css/bootstrap.min.css",
-      "libr/bootstrap/dist/js/bootstrap.min.js",
-      "libr/jquery/dist/jquery.min.js",
-      "libr/jquery-migrate/jquery-migrate.min.js",
-      "libr/font-awesome/css/font-awesome.min.css"
+      "bower_components/bootstrap/dist/js/bootstrap.min.js",
+      "bower_components/jquery/dist/jquery.min.js",
+      "bower_components/jquery-migrate/jquery-migrate.min.js",
+      "bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "bower_components/font-awesome/css/font-awesome.min.css"
     ], {
       base: "."
     })
