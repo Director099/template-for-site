@@ -1,9 +1,12 @@
 {
-  "name": "",
-  "version": "1.0.0",
-  "description": "Проект с использованием gulp",
-  "author": "",
-  "main": "index.js",
+  "name": "template-for-site",
+  "version": "0.0.5",
+  "description": "Start page",
+  "author": "Yaroslav Shevtsov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Director099/template-for-site.git"
+  },
   "devDependencies": {
     "browser-sync": "^2.18.5",
     "css-mqpacker": "^5.0.1",
@@ -12,7 +15,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-csso": "^2.0.0",
     "gulp-imagemin": "^3.1.1",
-    "gulp-less": "^3.3.0",
+    "gulp-less": "^3.3.2",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.2.0",
     "gulp-sass": "^3.1.0",
@@ -21,7 +24,7 @@
     "run-sequence": "^1.2.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"gulp build && gulp serve"
   },
   "license": "ISC"
 }
