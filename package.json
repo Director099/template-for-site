@@ -11,10 +11,13 @@
     "browser-sync": "^2.18.5",
     "css-mqpacker": "^5.0.1",
     "del": "^2.2.2",
+    "eslint": "3.9.0",
+    "eslint-config-htmlacademy": "0.2.x",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-csso": "^2.0.0",
     "gulp-imagemin": "^3.1.1",
+    "gulp-jsmin": "^0.1.5",
     "gulp-less": "^3.3.2",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.2.0",
@@ -24,7 +27,9 @@
     "run-sequence": "^1.2.2"
   },
   "scripts": {
-    "start":"gulp build && gulp serve"
+    "start": "gulp serve",
+    "build": "gulp build",
+    "test": "eslint js/"
   },
   "license": "ISC"
 }
