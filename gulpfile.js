@@ -16,7 +16,8 @@ var run = require("run-sequence"); //запуск плагинов очеред�
 var del = require("del"); //удаление ненужных файлов
 var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
- 
+var fileinclude = require('gulp-file-include'); //include html
+
 gulp.task("clean", function() {
   return del("build");
 });
@@ -51,19 +52,19 @@ gulp.task("style", function() {
         sort: true
       })
     ]))
-    .pipe(gulp.dest("."))
+    .pipe(gulp.dest("build/."))
     .pipe(minify())
-    .pipe(rename("style.min.css"))
+    .pipe(rename("build/style.min.css"))
     .pipe(gulp.dest("."))
     .pipe(server.stream());
 });
 
 gulp.task("serve", function() {
   server.init({
-    server: "."
+    server: "build/."
   });
   gulp.watch("less/**/*.less", ["style"]);
-  gulp.watch("*.html").on("change", server.reload);
+  gulp.watch(['*.html', 'template/*.html'], ['watch:html']);
 });
 
 gulp.task('script', function() {
@@ -101,9 +102,19 @@ gulp.task("symbols", function() {
     .pipe(gulp.dest("img"));
 });
 
+gulp.task('fileinclude', function() {
+  gulp.src(['index.html'])
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('build'));
+});
+
 gulp.task("build", function(fn) {
   run(
     "clean",
+    "fileinclude",
     "copyFonts",
     "copy",
     "script",
