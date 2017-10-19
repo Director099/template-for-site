@@ -26,18 +26,26 @@ gulp.task("copy", function() {
   return gulp.src([
       "fonts/**",
       "img/**",
-      "js/**",
-      "*.html",
-      "*.css"
+      "*.html"
     ], {
       base: "."
     })
     .pipe(gulp.dest("build"));
 });
 
-gulp.task('copyFonts', function() {
-  gulp.src('node_modules/font-awesome/fonts/**')
+gulp.task('copy:iconFonts', function() {
+  return gulp.src('node_modules/font-awesome/fonts/**')
   .pipe(gulp.dest('fonts'));
+});
+
+gulp.task('copy:fonts', function() {
+  return gulp.src('fonts/**')
+  .pipe(gulp.dest('build/fonts'));
+});
+
+gulp.task('copy:img', function() {
+  return gulp.src('img/**')
+  .pipe(gulp.dest('build/img'));
 });
 
 gulp.task("style", function() {
@@ -59,27 +67,32 @@ gulp.task("style", function() {
     .pipe(server.stream());
 });
 
-gulp.task("serve", function() {
-  server.init({
-    server: "build/."
-  });
-  gulp.watch("less/**/*.less", ["style"]);
-  gulp.watch(['*.html', 'template/*.html'], ['watch:html']);
+gulp.task('html', function() {
+  return gulp.src(['*.html'])
+    .pipe(plumber())
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('build'));
 });
 
-gulp.task('script', function() {
+
+
+gulp.task('js', function() {
   return gulp.src([
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/jquery-migrate/dist/jquery-migrate.min.js',
     'node_modules/popper.js/dist/umd/popper.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    'node_modules/owl.carousel/dist/owl.carousel.min.js'
+    'node_modules/owl.carousel/dist/owl.carousel.min.js',
+    'js/custom.js'
     ])
   .pipe(concat('script.js'))
-  .pipe(gulp.dest('js'))
+  .pipe(gulp.dest('build/js'))
   .pipe(uglify())
   .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest('js'));
+  .pipe(gulp.dest('build/js'));
 });
 
 
@@ -102,25 +115,37 @@ gulp.task("symbols", function() {
     .pipe(gulp.dest("img"));
 });
 
-gulp.task('fileinclude', function() {
-  gulp.src(['index.html'])
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
-    .pipe(gulp.dest('build'));
-});
-
 gulp.task("build", function(fn) {
   run(
     "clean",
-    "fileinclude",
-    "copyFonts",
+    "copy:iconFonts",
     "copy",
-    "script",
+    "js",
     "style",
     "images",
     "symbols",
+    "html",
     fn
   );
 });
+
+gulp.task("serve", function() {
+  server.init({
+    server: "build/."
+  });
+  gulp.watch("less/**/*.less", ["style"]);
+  gulp.watch(['*.html', '_include/*.html'], ['watch:html']);
+  gulp.watch(['js/*.js'], ['watch:js']);
+  gulp.watch(['img/**'], ['watch:img']);
+  gulp.watch(['fonts/**'], ['watch:fonts']);
+});
+
+gulp.task('watch:html', ['html'], reload);
+gulp.task('watch:js', ['js'], reload);
+gulp.task('watch:img', ['copy:img'], reload);
+gulp.task('watch:fonts', ['copy:fonts'], reload);
+
+function reload (done) {
+  server.reload();
+  done();
+}
