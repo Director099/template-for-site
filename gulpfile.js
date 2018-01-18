@@ -80,6 +80,7 @@ gulp.task('js', function() {
     // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
     'node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
     'node_modules/scrollup/dist/jquery.scrollUp.min.js',
+    'node_modules/jquery-parallax.js/parallax.min.js',
     // 'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js',
     'js/custom.js'
     ])
