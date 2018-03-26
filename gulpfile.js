@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var less = require('gulp-less'); //препроцессор less
+var sass = require('gulp-sass'); //препроцессор sass
 var plumber = require('gulp-plumber'); //плагин чтоб не слетело во время ошибок
 var postcss = require('gulp-postcss'); // плагин для автопрефикса, минифик
 var autoprefixer = require('autoprefixer'); // автопрефикс для браузеров
@@ -43,9 +43,9 @@ gulp.task('copy:img', function() {
 });
 
 gulp.task('style', function() {
-  gulp.src('less/style.less')
+  gulp.src('sass/style.scss')
     .pipe(plumber())
-    .pipe(less())
+    .pipe(sass())
     .pipe(postcss([
       autoprefixer({browsers: [
         'last 1 versions'
@@ -128,7 +128,7 @@ gulp.task('serve', function() {
   server.init({
     server: 'build/.'
   });
-  gulp.watch('less/**/*.less', ['style']);
+  gulp.watch('sass/**/*.scss', ['style']);
   gulp.watch(['*.html', '_include/*.html'], ['watch:html']);
   gulp.watch(['js/*.js'], ['watch:js']);
   gulp.watch(['img/**'], ['watch:img']);
