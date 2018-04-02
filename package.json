@@ -7,6 +7,10 @@
     "type": "git",
     "url": "https://github.com/Director099/template-for-site.git"
   },
+  "config": {
+    "source": "./src",
+    "build": "./build"
+  },
   "devDependencies": {
     "browser-sync": "^2.18.5",
     "css-mqpacker": "^5.0.1",
@@ -39,8 +43,7 @@
   },
   "scripts": {
     "start": "gulp build && gulp serve",
-    "build": "gulp build",
-    "test": "eslint js/"
+    "build": "gulp build"
   },
   "license": "ISC"
 }

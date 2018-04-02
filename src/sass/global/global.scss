@@ -1,21 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font: 300 $fz "Arial", sans-serif;
   color: $text-color;
 }
 
 a {
-  color: $color-link;
   cursor: pointer;
-  transition: $transition-time;
+  transition: $time;
 
   &:hover {
     text-decoration: none;
-    color: $color-link--hover;
   }
 }
 
 button {
-  transition: $transition-time;
+  transition: $time;
   cursor: pointer;
 }
 

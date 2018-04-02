@@ -1,5 +1,7 @@
 'use strict';
 
+var dirs = require('./package.json').config;
+
 var gulp = require('gulp');
 var sass = require('gulp-sass'); //препроцессор sass
 var plumber = require('gulp-plumber'); //плагин чтоб не слетело во время ошибок
@@ -19,31 +21,37 @@ var uglify = require('gulp-uglify'); // минификация js
 var fileinclude = require('gulp-file-include'); //include html
 
 gulp.task('clean', function() {
-  return del('build');
+  return del(dirs.build);
 });
 
 gulp.task('copy', function() {
   return gulp.src([
-      'fonts/**',
-      'img/**'
+      dirs.source + '/fonts/**',
+      dirs.source + '/img/**',
+      dirs.source + '/video/**'
     ], {
-      base: '.'
+      base: './src/'
     })
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest(dirs.build));
 });
 
 gulp.task('copy:fonts', function() {
-  return gulp.src('fonts/**')
-  .pipe(gulp.dest('build/fonts'));
+  return gulp.src(dirs.source + '/fonts/**')
+  .pipe(gulp.dest(dirs.build +'/fonts'));
 });
 
 gulp.task('copy:img', function() {
-  return gulp.src('img/**')
-  .pipe(gulp.dest('build/img'));
+  return gulp.src(dirs.source + '/img/**')
+  .pipe(gulp.dest(dirs.build + '/img'));
+});
+
+gulp.task('copy:video', function() {
+  return gulp.src(dirs.source + '/video/**')
+  .pipe(gulp.dest(dirs.build + '/video'));
 });
 
 gulp.task('style', function() {
-  gulp.src('sass/style.scss')
+  gulp.src(dirs.source + '/sass/style.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(postcss([
@@ -54,21 +62,21 @@ gulp.task('style', function() {
         sort: true
       })
     ]))
-    .pipe(gulp.dest('build/.'))
+    .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(minify())
-    .pipe(rename('build/style.min.css'))
-    .pipe(gulp.dest('.'))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(server.stream());
 });
 
 gulp.task('html', function() {
-  return gulp.src(['*.html'])
+  return gulp.src(dirs.source + '/*.html')
     .pipe(plumber())
     .pipe(fileinclude({
       prefix: '@@',
       basepath: '@file'
     }))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest(dirs.build));
 });
 
 gulp.task('js', function() {
@@ -81,34 +89,34 @@ gulp.task('js', function() {
     'node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
     'node_modules/scrollup/dist/jquery.scrollUp.min.js',
     // 'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js',
-    'js/custom.js'
+    dirs.source + '/js/custom.js'
     ])
   .pipe(plumber())
   .pipe(concat('script.js'))
-  .pipe(gulp.dest('build/js'))
+  .pipe(gulp.dest(dirs.build + '/js'))
   .pipe(uglify())
   .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest('build/js'));
+  .pipe(gulp.dest(dirs.build + '/js'));
 });
 
 gulp.task('images', function() {
-  return gulp.src('img/**/*.{png,jpg,gif}')
+  return gulp.src(dirs.source + '/img/**/*.{png,jpg,gif}')
     .pipe(imagemin([
       imagemin.optipng({optimizationLevel: 3}),
       imagemin.jpegtran({progressive: true})
     ]))
-    .pipe(gulp.dest('img'));
+    .pipe(gulp.dest(dirs.build + '/img'));
 });
 
 gulp.task('symbols', function() {
-  return gulp.src('img/sprite/*.svg')
+  return gulp.src(dirs.source + '/img/sprite/*.svg')
     .pipe(plumber())
     .pipe(svgmin())
     .pipe(svgstore({
       inlineSvg: true
     }))
     .pipe(rename('symbols.svg'))
-    .pipe(gulp.dest('img'));
+    .pipe(gulp.dest(dirs.build + '/img'));
 });
 
 gulp.task('build', function(fn) {
@@ -126,19 +134,26 @@ gulp.task('build', function(fn) {
 
 gulp.task('serve', function() {
   server.init({
-    server: 'build/.'
+    server: dirs.build,
+    startPath: 'index.html'
   });
-  gulp.watch('sass/**/*.scss', ['style']);
-  gulp.watch(['*.html', '_include/*.html'], ['watch:html']);
-  gulp.watch(['js/*.js'], ['watch:js']);
-  gulp.watch(['img/**'], ['watch:img']);
-  gulp.watch(['fonts/**'], ['watch:fonts']);
+  gulp.watch(dirs.source + '/sass/**/*.scss', ['style']);
+  gulp.watch([
+    dirs.source + '/*.html',
+    dirs.source + '/_include/*.html'
+    ], ['watch:html']);
+
+  gulp.watch([dirs.source + '/js/*.js'], ['watch:js']);
+  gulp.watch(['src/img/**'], ['watch:img']);
+  gulp.watch(['src/fonts/**'], ['watch:fonts']);
+  gulp.watch(['src/video/**'], ['watch:fonts']);
 });
 
 gulp.task('watch:html', ['html'], reload);
 gulp.task('watch:js', ['js'], reload);
 gulp.task('watch:img', ['copy:img'], reload);
 gulp.task('watch:fonts', ['copy:fonts'], reload);
+gulp.task('watch:video', ['copy:video'], reload);
 
 function reload(done) {
   server.reload();
