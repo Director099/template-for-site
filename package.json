@@ -8,8 +8,8 @@
     "url": "https://github.com/Director099/template-for-site.git"
   },
   "config": {
-    "source": "./src",
-    "build": "./build"
+    "source": "src",
+    "build": "build"
   },
   "devDependencies": {
     "browser-sync": "^2.18.5",
