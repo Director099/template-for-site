@@ -18,7 +18,7 @@ var run = require('run-sequence'); //запуск плагинов очеред�
 var del = require('del'); //удаление ненужных файлов
 var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
-var fileinclude = require('gulp-file-include'); //include html
+var pug = require('gulp-pug'); // pug
 
 gulp.task('clean', function() {
   return del(dirs.build);
@@ -69,15 +69,15 @@ gulp.task('style', function() {
     .pipe(server.stream());
 });
 
-gulp.task('html', function() {
-  return gulp.src(dirs.source + '/*.html')
-    .pipe(plumber())
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
-    .pipe(gulp.dest(dirs.build));
+gulp.task('pug', function () {
+  return gulp.src(dirs.source + '/*.pug')
+  .pipe(plumber())
+  .pipe(pug({
+    pretty: true
+  }))
+  .pipe(gulp.dest(dirs.build))
 });
+
 
 gulp.task('js', function() {
   return gulp.src([
@@ -138,10 +138,8 @@ gulp.task('serve', function() {
     startPath: 'index.html'
   });
   gulp.watch(dirs.source + '/sass/**/*.scss', ['style']);
-  gulp.watch([
-    dirs.source + '/*.html',
-    dirs.source + '/_include/*.html'
-    ], ['watch:html']);
+  gulp.watch(dirs.source + '/blocks/**/*.pug', ['watch:pug']);
+  gulp.watch(dirs.source + '/*.pug', ['watch:pug']);
 
   gulp.watch([dirs.source + '/js/*.js'], ['watch:js']);
   gulp.watch(['src/img/**'], ['watch:img']);
