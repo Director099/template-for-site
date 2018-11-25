@@ -19,6 +19,8 @@ var del = require('del'); //удаление ненужных файлов
 var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
 var pug = require('gulp-pug'); // pug
+var atImport = require("postcss-import"); // Импорт стороним плагином чтоб избежать ошибки
+var tinify = require('gulp-tinypng');
 
 gulp.task('clean', function() {
   return del(dirs.build);
@@ -60,7 +62,8 @@ gulp.task('style', function() {
       ]}),
       mqpacker ({
         sort: true
-      })
+      }),
+      atImport()
     ]))
     .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(minify())
@@ -85,10 +88,10 @@ gulp.task('js', function() {
     'node_modules/jquery-migrate/dist/jquery-migrate.min.js',
     'node_modules/popper.js/dist/umd/popper.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
-    // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
+    'node_modules/owl.carousel/dist/owl.carousel.min.js',
     'node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
     'node_modules/scrollup/dist/jquery.scrollUp.min.js',
-    // 'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js',
+    'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js',
     dirs.source + '/js/custom.js'
     ])
   .pipe(plumber())
@@ -127,7 +130,7 @@ gulp.task('build', function(fn) {
     'style',
     'images',
     'symbols',
-    'html',
+    'pug',
     fn
   );
 });
@@ -137,8 +140,8 @@ gulp.task('serve', function() {
     server: dirs.build,
     startPath: 'index.html'
   });
-  gulp.watch(dirs.source + '/sass/**/*.scss', ['style']);
-  gulp.watch(dirs.source + '/blocks/**/*.pug', ['watch:pug']);
+  gulp.watch(['src/blocks/**/*.scss', 'src/sass/**/*.scss'], ['style']);
+  gulp.watch(dirs.source + '/blocks/**/**/*.pug', ['watch:pug']);
   gulp.watch(dirs.source + '/*.pug', ['watch:pug']);
 
   gulp.watch([dirs.source + '/js/*.js'], ['watch:js']);
@@ -147,7 +150,7 @@ gulp.task('serve', function() {
   gulp.watch(['src/video/**'], ['watch:fonts']);
 });
 
-gulp.task('watch:html', ['html'], reload);
+gulp.task('watch:pug', ['pug'], reload);
 gulp.task('watch:js', ['js'], reload);
 gulp.task('watch:img', ['copy:img'], reload);
 gulp.task('watch:fonts', ['copy:fonts'], reload);
@@ -157,3 +160,9 @@ function reload(done) {
   server.reload();
   done();
 }
+
+gulp.task('tinify', function() {
+    return gulp.src('src/img/**/*.{png,jpg}')
+      .pipe(tinify('q2jg3LuY5Bktm617swAOD7nk3X3Mc8OH'))
+      .pipe(gulp.dest('build/new-img'));
+});
