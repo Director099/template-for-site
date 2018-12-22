@@ -1,15 +1,15 @@
 // Style plagin
+@import "variables";
 
-@import "node_modules/normalize.css/normalize.css";
-// @import "node_modules/bootstrap/scss/bootstrap-grid.scss";
-// @import "node_modules/owl.carousel/dist/assets/owl.carousel.css";
-// @import "node_modules/owl.carousel/dist/assets/owl.theme.default.css";
-// @import "node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css";
+@import "../../node_modules/normalize.css/normalize.css";
+// @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+// @import "../../node_modules/owl.carousel/dist/assets/owl.carousel.css";
+// @import "../../node_modules/owl.carousel/dist/assets/owl.theme.default.css";
+// @import "../../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css";
 
 // My style
 
-@import "variables";
-// @import "grid-mixins";
+ @import "grid-mixins";
 
 
 @import "functions";
@@ -18,7 +18,5 @@
 // @import "fonts";
 @import "global";
 
-// @import "block/scrollUp";
-@import "blocks/project/page-header";
-@import "blocks/project/page-footer";
-// @import "block/fullpage";
+@import "../blocks/project/page-header/page-header";
+@import "../blocks/project/page-footer/page-footer";
