@@ -43,7 +43,7 @@ gulp.task('copy', function () {
   ], {
     base: './src/'
   })
-    .pipe(gulp.dest(dirs.build));
+  .pipe(gulp.dest(dirs.build));
 });
 
 gulp.task('copy:fonts', function () {
