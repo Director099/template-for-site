@@ -21,8 +21,15 @@ var uglify = require('gulp-uglify'); // минификация js
 var pug = require('gulp-pug'); // pug
 var atImport = require("postcss-import"); // Импорт стороним плагином чтоб избежать ошибки
 var csscomb = require('gulp-csscomb');
-var htmlbeautify = require('gulp-html-beautify');
+var prettyHtml = require('gulp-pretty-html');
 var tinify = require('gulp-tinypng');
+
+var prettyOption = {
+  indent_size: 4,
+  indent_char: ' ',
+  unformatted: ['code', 'em', 'strong', 'span', 'i', 'b', 'br', 'script'],
+  content_unformatted: [],
+};
 
 gulp.task('clean', function () {
   return del(dirs.build);
@@ -83,7 +90,7 @@ gulp.task('pug', function () {
     .pipe(pug({
       pretty: true
     }))
-    .pipe(htmlbeautify())
+    .pipe(prettyHtml(prettyOption))
     .pipe(gulp.dest(dirs.build))
 });
 
