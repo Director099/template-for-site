@@ -20,9 +20,16 @@ var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
 var pug = require('gulp-pug'); // pug
 var atImport = require("postcss-import"); // Импорт стороним плагином чтоб избежать ошибки
-var csscomb = require('gulp-csscomb');
-var htmlbeautify = require('gulp-html-beautify');
-var tinify = require('gulp-tinypng');
+var csscomb = require('gulp-csscomb'); // Красота Css
+var prettyHtml = require('gulp-pretty-html'); // Красота HTML
+var tinify = require('gulp-tinypng'); // Сжатие изображения
+
+var prettyOption = {
+  indent_size: 4,
+  indent_char: ' ',
+  unformatted: ['code', 'em', 'strong', 'span', 'i', 'b', 'br', 'script'],
+  content_unformatted: [],
+};
 
 gulp.task('clean', function () {
   return del(dirs.build);
@@ -32,11 +39,12 @@ gulp.task('copy', function () {
   return gulp.src([
     dirs.source + '/fonts/**',
     dirs.source + '/img/**',
-    dirs.source + '/video/**'
+    dirs.source + '/video/**',
+    dirs.source + '../robots.txt'
   ], {
     base: './src/'
   })
-    .pipe(gulp.dest(dirs.build));
+  .pipe(gulp.dest(dirs.build));
 });
 
 gulp.task('copy:fonts', function () {
@@ -83,7 +91,7 @@ gulp.task('pug', function () {
     .pipe(pug({
       pretty: true
     }))
-    .pipe(htmlbeautify())
+    .pipe(prettyHtml(prettyOption))
     .pipe(gulp.dest(dirs.build))
 });
 
@@ -170,5 +178,5 @@ function reload(done) {
 gulp.task('tinify', function () {
   return gulp.src('src/img/**/*.{png,jpg}')
     .pipe(tinify('q2jg3LuY5Bktm617swAOD7nk3X3Mc8OH'))
-    .pipe(gulp.dest('build/new-img'));
+    .pipe(gulp.dest('src/tiny-img'));
 });
