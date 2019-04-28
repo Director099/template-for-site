@@ -1,22 +1,19 @@
 // Style plagin
 @import "variables";
 
-@import "../../node_modules/normalize.css/normalize.css";
 // @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
-// @import "../../node_modules/owl.carousel/dist/assets/owl.carousel.css";
-// @import "../../node_modules/owl.carousel/dist/assets/owl.theme.default.css";
-// @import "../../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css";
 
 // My style
 
- @import "grid-mixins";
-
+@import "grid-mixins";
 
 @import "functions";
 
-
-// @import "fonts";
+@import "fonts";
 @import "global";
+
+@import "../blocks/companents/btn/btn";
 
 @import "../blocks/project/page-header/page-header";
 @import "../blocks/project/page-footer/page-footer";
+@import "../blocks/project/order-page/order-page";

@@ -32,6 +32,9 @@ $fz--h5:                      1em;
 $fz--h6:                      1em;
 $fz--small:                   0.75em;
 
+$font-family:                 -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$font-family--monospace:     SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
 // Ширины
 
 $screen-sm:                   480px;
@@ -46,3 +49,5 @@ $grid-gutter-width:           30px;
 // Разное
 
 $time:                        0.3s;
+$shadow:                      0 4px 2px -2px rgba(0, 0, 0, 0.3);
+$opacity:                     0.7;
