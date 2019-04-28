@@ -99,21 +99,19 @@ gulp.task('pug', function () {
 gulp.task('js', function () {
   return gulp.src([
     'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/jquery-migrate/dist/jquery-migrate.min.js',
     'node_modules/popper.js/dist/umd/popper.min.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
     // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
     'node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
-    'node_modules/scrollup/dist/jquery.scrollUp.min.js',
     'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js',
     dirs.source + '/js/custom.js'
   ])
     .pipe(plumber())
     .pipe(concat('script.js'))
     .pipe(gulp.dest(dirs.build + '/js'))
-    .pipe(uglify())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest(dirs.build + '/js'));
+    // .pipe(uglify())
+    // .pipe(rename({suffix: '.min'}))
+    // .pipe(gulp.dest(dirs.build + '/js'));
 });
 
 gulp.task('images', function () {

@@ -1,11 +1,5 @@
 'use strict';
 
-$(function () {
-    $.scrollUp({
-        scrollText: '',
-    });
-});
-
 // Плавный скол с навигации
 
 /* $(".scrollto > a").click(function () {

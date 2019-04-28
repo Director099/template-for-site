@@ -40,11 +40,9 @@
     "bootstrap": "^4.0.0-beta.3",
     "jquery": "^3.2.1",
     "jquery-mask-plugin": "^1.14.13",
-    "jquery-migrate": "^3.0.1",
     "normalize.css": "^8.0.0",
     "owl.carousel": "^2.2.0",
     "popper.js": "^1.13.0",
-    "scrollup": "github:markgoodyear/scrollup"
   },
   "scripts": {
     "start": "gulp build && gulp serve",
