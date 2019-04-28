@@ -19,7 +19,7 @@ var del = require('del'); //удаление ненужных файлов
 var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
 var pug = require('gulp-pug'); // pug
-var atImport = require("postcss-import"); // Импорт стороним плагином чтоб избежать ошибки
+var atImport = require('postcss-import'); // Импорт стороним плагином чтоб избежать ошибки
 var csscomb = require('gulp-csscomb'); // Красота Css
 var prettyHtml = require('gulp-pretty-html'); // Красота HTML
 var tinify = require('gulp-tinypng'); // Сжатие изображения
@@ -105,7 +105,8 @@ gulp.task('pug', function () {
   return gulp.src(dirs.source + '/*.pug')
     .pipe(plumber())
     .pipe(pug({
-      pretty: true
+      pretty: true,
+      cache: true
     }))
     .pipe(prettyHtml(prettyOption))
     .pipe(gulp.dest(dirs.build))
@@ -170,7 +171,7 @@ gulp.task('serve', function () {
   gulp.watch([dirs.source + '/js/*.js'], ['watch:js']);
   gulp.watch(['src/img/**'], ['watch:img']);
   gulp.watch(['src/fonts/**'], ['watch:fonts']);
-  gulp.watch(['src/video/**'], ['watch:fonts']);
+  gulp.watch(['src/video/**'], ['watch:video']);
 });
 
 gulp.task('watch:pug', ['pug'], reload);
