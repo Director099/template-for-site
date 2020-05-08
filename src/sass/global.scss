@@ -54,10 +54,10 @@ html {
 }
 
 body {
-  font: 300 $fz $font-family;
-  color: $text-color;
+  display: flex;           // Исправляем баг в IE для min-height and flexbox (flex-direction:column)
+  flex-direction: column;  // и прижимаем footer в IE 10-11
   margin: 0;
-
+  min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale
 }
@@ -118,10 +118,22 @@ h5,
 h6 {
   margin-top: 0;
   margin-bottom: 15px;
-  font-family: $font-family;
   font-weight: 700;
   line-height: 1.2;
   color: currentColor;
+}
+
+// area,
+// summary,
+a,
+button,
+[role='button'],
+input,
+label,
+select,
+textarea {
+  touch-action: manipulation; // Стилевая коррекция 300ms задержки (для поддерживающих браузеров)
+  margin: 0;                  // Убираем margin в Firefox и Safari
 }
 
 // Similarly, the top margin on `<p>`s get reset. However, we also reset the

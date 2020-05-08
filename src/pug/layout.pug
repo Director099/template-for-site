@@ -1,7 +1,7 @@
 include mixins.pug
 
 doctype html
-html(lang='ru')
+html(class='page', lang='ru')
 
   head
     meta(charset='utf-8')
@@ -14,9 +14,9 @@ html(lang='ru')
     meta(content='notranslate', name='google')
 
     //- Настройки шаринга, оставил ссылки на изображение так как остальное берт с дескришина https://ruogp.me/
-    meta(property='og:image', content='img/sharing/logo.png')
-    meta(property='vk:image', content='img/sharing/logo.png')
-    meta(name='twitter:image:src', content='img/sharing/logo.png')
+    //- meta(property='og:image', content='img/favicon/apple-touch-icon.png')
+    //- meta(property='vk:image', content='img/favicon/apple-touch-icon.png')
+    //- meta(name='twitter:image:src', content='img/favicon/apple-touch-icon.png')
 
     //- Фавиконки (https://realfavicongenerator.net)
     //- link(rel='manifest' href='img/favicon/site.webmanifest')
@@ -24,15 +24,13 @@ html(lang='ru')
     //- link(rel='apple-touch-icon' sizes='180x180' href='img/favicon/apple-touch-icon.png')
     //- link(rel='icon' type='image/png' sizes='32x32' href='img/favicon/favicon-32x32.png')
     //- link(rel='icon' type='image/png' sizes='16x16' href='img/favicon/favicon-16x16.png')
-    link(rel='icon', type='image/ico', sizes='16x16', href='img/favicon/favicon-16x16.ico')
+    link(rel='icon', type='image/ico', sizes='16x16', href='img/favicon/favicon.ico')
 
     //- Оптимизация шрифта
     //- link(rel='preload' href='fonts/' as='font')
     //- link(rel='preload' href='fonts/' as='font')
     //- link(rel='preload' href='fonts/' as='font')
 
-    //- link(rel='stylesheet', href='libs/owl.carousel/dist/assets/owl.carousel.min.css')
-    //- link(rel='stylesheet', href='libs/owl.carousel/dist/assets/owl.theme.default.min.css')
     //- link(rel='stylesheet', href='libs/@fancyapps/fancybox/dist/jquery.fancybox.min.css')')
 
     link(rel='stylesheet', href='css/style.min.css')
@@ -45,16 +43,16 @@ html(lang='ru')
       title Home
 
   body
-    block header
-      p «шапка»
-    block content
-      p содержимое страницы
-    block footer
-      p «подвал»
-    block page-bottom
-      script(src='libs/jquery/dist/jquery.min.js')
-      //- script(src='libs/popper.js/dist/umd/popper.min.js')
-      //- script(src='libs/bootstrap/dist/js/bootstrap.min.js')
-      //- script(src='libs/owl.carousel/dist/owl.carousel.min.js')
-      //- script(src='libs/@fancyapps/fancybox/dist/jquery.fancybox.min.js')
-      script(src='js/custom.js')
+    .page__inner
+      .page__content
+        block header
+          p «шапка»
+        block content
+          p содержимое страницы
+      .page__footer-wrapper
+        block footer
+          p «подвал»
+    script(src='libs/jquery/dist/jquery.min.js')
+    //- script(src='libs/@fancyapps/fancybox/dist/jquery.fancybox.min.js')
+    //- script(src='libs/dist/inputmask.min.js')
+    script(src='js/custom.js')

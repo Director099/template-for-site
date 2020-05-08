@@ -4,6 +4,7 @@ var dirs = require('./package.json').config;
 
 var gulp = require('gulp');
 var sass = require('gulp-sass'); //препроцессор sass
+var sourcemap = require("gulp-sourcemaps"); // карта компанентов
 var plumber = require('gulp-plumber'); //плагин чтоб не слетело во время ошибок
 var postcss = require('gulp-postcss'); // плагин для автопрефикса, минифик
 var autoprefixer = require('autoprefixer'); // автопрефикс для браузеров
@@ -66,12 +67,8 @@ gulp.task('copy:video', function () {
 gulp.task('copy:libs', function () {
   return gulp.src([
     'node_modules/jquery/**',
-    'node_modules/popper.js/**',
-    'node_modules/bootstrap/**',
-    'node_modules/owl.carousel/**',
-    'node_modules/jquery-mask-plugin/**',
+    'node_modules/inputmask/**',
     'node_modules/@fancyapps/fancybox/**',
-    'node_modules/normalize.css/**',
     ], {
       base: 'node_modules/'
     })
@@ -81,6 +78,7 @@ gulp.task('copy:libs', function () {
 gulp.task('style', function () {
   gulp.src(dirs.source + '/sass/style.scss')
     .pipe(plumber())
+    .pipe(sourcemap.init())
     .pipe(sass())
     .pipe(postcss([
       autoprefixer({
@@ -97,6 +95,7 @@ gulp.task('style', function () {
     .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(minify())
     .pipe(rename('style.min.css'))
+    .pipe(sourcemap.write("."))
     .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(server.stream());
 });
