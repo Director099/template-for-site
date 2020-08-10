@@ -9,7 +9,9 @@
   },
   "config": {
     "source": "src",
-    "build": "build"
+    "build": "build",
+    "components": "src/blocks/components",
+    "project": "src/blocks/project"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
@@ -19,7 +21,7 @@
     "stylelint": "^10.0.0",
     "stylelint-order": "^2.0.0",
     "stylelint-selector-bem-pattern": "^2.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-csscomb": "^3.0.8",
