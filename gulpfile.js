@@ -41,7 +41,7 @@ gulp.task('copy', function () {
     dirs.source + '/img/**',
     dirs.source + '/video/**',
     dirs.source + '/libs/**',
-    dirs.source + '../robots.txt'
+    'robots.txt'
   ], {
     base: './src/'
   })
@@ -78,7 +78,7 @@ gulp.task('copy:libs', function () {
     .pipe(gulp.dest('src/libs'));
 });
 
-gulp.task('style', function () {
+gulp.task('style', function (done) {
   gulp.src(dirs.source + '/sass/style.scss')
     .pipe(plumber())
     .pipe(sass())
@@ -99,6 +99,8 @@ gulp.task('style', function () {
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest(dirs.build + '/css'))
     .pipe(server.stream());
+
+    done();
 });
 
 gulp.task('pug', function () {
@@ -110,15 +112,17 @@ gulp.task('pug', function () {
     }))
     .pipe(prettyHtml(prettyOption))
     .pipe(gulp.dest(dirs.build))
+    .pipe(server.stream());
 });
 
 
 gulp.task('js', function () {
   return gulp.src([
-    dirs.source + '/js/custom.js'
+    dirs.source + '/js/custom.js',
+    dirs.components + '/dropdown/dropdown.js'
   ])
   .pipe(plumber())
-  // .pipe(concat('script.js'))
+  .pipe(concat('script.js'))
   .pipe(gulp.dest(dirs.build + '/js'))
   .pipe(uglify())
   .pipe(rename({suffix: '.min'}))
@@ -145,41 +149,33 @@ gulp.task('symbols', function () {
     .pipe(gulp.dest(dirs.build + '/img'));
 });
 
-gulp.task('build', function (fn) {
-  run(
-    'clean',
-    'copy:libs',
-    'copy',
-    'js',
-    'style',
-    'images',
-    'symbols',
-    'pug',
-    fn
-  );
-});
+gulp.task('build', gulp.series('clean', 'copy:libs', 'copy', 'js', 'style', 'images', 'symbols', 'pug'));
 
 gulp.task('serve', function () {
   server.init({
     server: dirs.build,
     startPath: 'index.html'
   });
-  gulp.watch(['src/blocks/**/*.scss', 'src/sass/**/*.scss'], ['style']);
-  gulp.watch(dirs.source + '/blocks/**/**/*.pug', ['watch:pug']);
-  gulp.watch(dirs.source + '/*.pug', ['watch:pug']);
+  gulp.watch(['src/blocks/**/**/*.scss', 'src/sass/**/*.scss'], gulp.series('watch:style'));
+  gulp.watch(dirs.source + '/blocks/**/**/*.pug', gulp.series('watch:pug'));
+  gulp.watch(dirs.source + '/*.pug', gulp.series('watch:pug'));
+  gulp.watch(dirs.source + '/pug/*.pug', gulp.series('watch:pug'));
 
-  gulp.watch([dirs.source + '/js/*.js'], ['watch:js']);
-  gulp.watch(['src/img/**'], ['watch:img']);
-  gulp.watch(['src/fonts/**'], ['watch:fonts']);
-  gulp.watch(['src/video/**'], ['watch:video']);
+  gulp.watch([dirs.source + '/js/*.js'], gulp.series('watch:js'));
+  gulp.watch(['src/img/**'], gulp.series('watch:img'));
+  gulp.watch(['src/fonts/**'], gulp.series('watch:fonts'));
+  gulp.watch(['src/video/**'], gulp.series('watch:video'));
+  gulp.watch(['src/img/**'], gulp.series('watch:symbols'));
 });
 
-gulp.task('watch:pug', ['pug'], reload);
-gulp.task('watch:js', ['js'], reload);
-gulp.task('watch:img', ['copy:img'], reload);
-gulp.task('watch:fonts', ['copy:fonts'], reload);
-gulp.task('watch:video', ['copy:video'], reload);
-gulp.task('watch:libs', ['copy:libs'], reload);
+gulp.task('watch:pug', gulp.series('pug'), reload);
+gulp.task('watch:js', gulp.series('js'), reload);
+gulp.task('watch:img', gulp.series('copy:img'), reload);
+gulp.task('watch:fonts', gulp.series('copy:fonts'), reload);
+gulp.task('watch:video', gulp.series('copy:video'), reload);
+gulp.task('watch:libs', gulp.series('copy:libs'), reload);
+gulp.task('watch:symbols', gulp.series('symbols'), reload);
+gulp.task('watch:style', gulp.series('style'), reload);
 
 function reload(done) {
   server.reload();
