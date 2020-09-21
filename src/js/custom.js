@@ -1,5 +1,8 @@
 'use strict';
 
+import './config/jqueryLoad';
+import '@fancyapps/fancybox/dist/jquery.fancybox.min';
+import '../blocks/components/dropdown/dropdown.js';
 // Плавный скол с навигации
 
 /* $(".scrollto > a").click(function () {

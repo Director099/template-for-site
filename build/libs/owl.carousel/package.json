@@ -2,7 +2,7 @@
   "_args": [
     [
       "owl.carousel@2.3.4",
-      "D:\\template\\template-for-site"
+      "/Users/uwetu/Desktop/Work/template-for-site"
     ]
   ],
   "_from": "owl.carousel@2.3.4",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/owl.carousel/-/owl.carousel-2.3.4.tgz",
   "_spec": "2.3.4",
-  "_where": "D:\\template\\template-for-site",
+  "_where": "/Users/uwetu/Desktop/Work/template-for-site",
   "author": {
     "name": "David Deutsch",
     "email": "deutsch@medienpark.net",

@@ -2,7 +2,7 @@
   "_args": [
     [
       "normalize.css@8.0.1",
-      "D:\\template\\template-for-site"
+      "/Users/uwetu/Desktop/Work/template-for-site"
     ]
   ],
   "_from": "normalize.css@8.0.1",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/normalize.css/-/normalize.css-8.0.1.tgz",
   "_spec": "8.0.1",
-  "_where": "D:\\template\\template-for-site",
+  "_where": "/Users/uwetu/Desktop/Work/template-for-site",
   "bugs": {
     "url": "https://github.com/necolas/normalize.css/issues"
   },
