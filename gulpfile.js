@@ -14,15 +14,19 @@ var rename = require('gulp-rename'); // перемейноввывние имя 
 var imagemin = require('gulp-imagemin'); // ужимаем изображение
 var svgstore = require('gulp-svgstore'); // собиральщик cvg
 var svgmin = require('gulp-svgmin'); // свг минификация
-var run = require('run-sequence'); //запуск плагинов очередью
+//var run = require('run-sequence'); //запуск плагинов очередью
 var del = require('del'); //удаление ненужных файлов
-var concat = require('gulp-concat'); // Конкатинация
+//var concat = require('gulp-concat'); // Конкатинация
 var uglify = require('gulp-uglify'); // минификация js
 var pug = require('gulp-pug'); // pug
 var atImport = require('postcss-import'); // Импорт стороним плагином чтоб избежать ошибки
 var csscomb = require('gulp-csscomb'); // Красота Css
 var prettyHtml = require('gulp-pretty-html'); // Красота HTML
 var tinify = require('gulp-tinypng'); // Сжатие изображения
+var rollup = require('gulp-better-rollup');
+var babel = require('rollup-plugin-babel');
+var resolve = require('rollup-plugin-node-resolve');
+var commonjs = require('rollup-plugin-commonjs');
 
 var prettyOption = {
   indent_size: 4,
@@ -117,16 +121,13 @@ gulp.task('pug', function () {
 
 
 gulp.task('js', function () {
-  return gulp.src([
-    dirs.source + '/js/custom.js',
-    dirs.components + '/dropdown/dropdown.js'
-  ])
-  .pipe(plumber())
-  .pipe(concat('script.js'))
-  .pipe(gulp.dest(dirs.build + '/js'))
-  .pipe(uglify())
-  .pipe(rename({suffix: '.min'}))
-  .pipe(gulp.dest(dirs.build + '/js'));
+  return gulp.src(dirs.source + '/js/*.js')
+    .pipe(rollup({ plugins: [babel(), resolve(), commonjs()] }, 'umd'))
+    .pipe(plumber())
+    .pipe(gulp.dest(dirs.build + '/js'))
+    .pipe(uglify())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(dirs.build + '/js'));
 });
 
 gulp.task('images', function () {

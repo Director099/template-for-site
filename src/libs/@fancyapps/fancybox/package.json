@@ -2,7 +2,7 @@
   "_args": [
     [
       "@fancyapps/fancybox@3.5.2",
-      "D:\\template\\template-for-site"
+      "/Users/uwetu/Desktop/Work/template-for-site"
     ]
   ],
   "_from": "@fancyapps/fancybox@3.5.2",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@fancyapps/fancybox/-/fancybox-3.5.2.tgz",
   "_spec": "3.5.2",
-  "_where": "D:\\template\\template-for-site",
+  "_where": "/Users/uwetu/Desktop/Work/template-for-site",
   "author": {
     "name": "fancyApps"
   },

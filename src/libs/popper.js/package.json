@@ -2,7 +2,7 @@
   "_args": [
     [
       "popper.js@1.14.5",
-      "D:\\template\\template-for-site"
+      "/Users/uwetu/Desktop/Work/template-for-site"
     ]
   ],
   "_from": "popper.js@1.14.5",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/popper.js/-/popper.js-1.14.5.tgz",
   "_spec": "1.14.5",
-  "_where": "D:\\template\\template-for-site",
+  "_where": "/Users/uwetu/Desktop/Work/template-for-site",
   "author": {
     "name": "Federico Zivolo",
     "email": "federico.zivolo@gmail.com"
