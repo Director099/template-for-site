@@ -8,3 +8,6 @@
   * Проверка синтаксиса SCSS **npm run test:style**
   * Проверка синтаксиса PUG **npm run test:pug**
   * Глобальная проверка синтаксиса (JS, PUG, SCSS) **npm run test**
+
+## Обязательный регламент верстки (обязатиелен к прочтению)
+  [Документ] (https://docs.google.com/document/d/1YPE6nl7dWvi2hgQG4QfK6m_n7JolOzydXnYK9-3rt84/edit)
