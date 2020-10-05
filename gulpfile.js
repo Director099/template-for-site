@@ -82,10 +82,7 @@ const style = (done) => {
 const pug2html = () => {
   return gulp.src(dirs.source + '/*.pug')
     .pipe(plumber())
-    .pipe(pug({
-      pretty: true,
-      cache: true
-    }))
+    .pipe(pug())
     .pipe(prettyHtml(prettyOption))
     .pipe(gulp.dest(dirs.build))
     .pipe(server.stream());
