@@ -24,19 +24,12 @@ const uglify = require('gulp-uglify'); // минификация js
 // pug
 const atImport = require('postcss-import'); // Импорт стороним плагином чтоб избежать ошибки
 const csscomb = require('gulp-csscomb'); // Красота Css
-const prettyHtml = require('gulp-pretty-html'); // Красота HTML
+const prettify = require('gulp-prettify'); // Красота HTML
 const tinify = require('gulp-tinypng'); // Сжатие изображения
 const rollup = require('gulp-better-rollup');
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-
-var prettyOption = {
-  indent_size: 4,
-  indent_char: ' ',
-  unformatted: ['code', 'em', 'strong', 'span', 'i', 'b', 'br', 'script'],
-  content_unformatted: [],
-};
 
 const clean = () => {
   return del(dirs.build);
@@ -83,7 +76,12 @@ const pug2html = () => {
   return gulp.src(dirs.source + '/*.pug')
     .pipe(plumber())
     .pipe(pug())
-    .pipe(prettyHtml(prettyOption))
+    .pipe(prettify({
+      indent_size: 2,
+      indent_char: ' ',
+      inline: [], // перенос строки для всех инлайн элементов
+      end_with_newline: true // перенос строки в конце файла
+    }))
     .pipe(gulp.dest(dirs.build))
     .pipe(server.stream());
 }
