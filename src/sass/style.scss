@@ -1,18 +1,16 @@
-// Style plagin
-@import "variables";
+@import "../blocks/shared/utils-css/constans/variables";
+@import "../blocks/shared/utils-css/mixins/grid-mixins";
 
-// My style
+@import "../blocks/shared/utils-css/fonts/fonts";
 
-@import "grid-mixins";
+@import "../blocks/shared/utils-css/global/global";
 
-@import "functions";
+@import "../blocks/shared/utils-css/grid-tpl/grid-tpl";
+@import "../blocks/shared/utils-css/display/display";
+@import "../blocks/shared/utils-css/visibility-hidden/visibility-hidden";
+@import "../blocks/shared/utils-css/mixins/mixins";
 
-@import "fonts";
-@import "global";
-
-@import "../blocks/components/btn/btn";
-@import "../blocks/components/container/container";
-
-@import "../blocks/project/page-header/page-header";
-@import "../blocks/project/page-footer/page-footer";
-@import "../blocks/project/order-page/order-page";
+@import "../blocks/shared/ui/page/page";
+@import "../blocks/shared/ui/container/container";
+@import "../blocks/shared/ui/btn/btn";
+@import "../blocks/shared/ui/logo/logo";
