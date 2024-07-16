@@ -1,0 +1,30 @@
+@mixin mask-photo($mask) {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  bottom: -1px;
+  right: -1px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: $mask;
+}
+
+@mixin field-focus {
+  outline: 0;
+}
+
+@mixin ul-none() {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin text-gradient($gradient-color, $color) {
+  display: inline-block;
+  color: $color;
+  background-image: $gradient-color;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

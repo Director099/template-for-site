@@ -1,0 +1,40 @@
+-
+  const mediaSize = {
+    xl: 1200,
+  }
+
+  const numberPhone = {
+    href: 'tel:+79196039770',
+    text: '+7 (919) 603-97-70'
+  }
+
+  const contactEmail = {
+    href: 'mailto:moikaokon-rb@mail.ru',
+    text: 'moikaokon-rb@mail.ru'
+  }
+
+  const formFilelds = {
+    name: {
+      title: 'Имя',
+      attrs: {
+        placeholder: 'Ваше имя',
+        type: "text",
+      }
+    },
+    phone: {
+      title: 'Телефон',
+      attrs: {
+        placeholder: 'Телефон',
+        type: 'tel',
+        pattern: `/(\\+7|8)[\\s(]*\\d{3}[)\\s][\\s]\\d{3}[\\s]\\d{2}[\\s]\\d{2}/i`,
+        "data-pristine-pattern-message": " "
+      }
+    },
+    email: {
+      title: 'Email',
+      attrs: {
+        type: "email",
+        "data-pristine-email-message": " "
+      }
+    },
+  }

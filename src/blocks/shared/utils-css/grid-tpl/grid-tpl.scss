@@ -1,0 +1,77 @@
+@mixin grid-default($i) {
+  display: grid;
+  grid-template-columns: repeat($i, 1fr);
+  gap: 30px; //TODO: Дефолтное значение
+}
+
+@for $i from 1 through 12 {
+  .grid-tpl-#{$i} {
+    @include grid-default($i);
+  }
+
+  .grid-tpl-md-#{$i} {
+    @media (min-width: $screen-md) {
+      @include grid-default($i);
+    }
+  }
+
+  .grid-tpl-lg-#{$i} {
+    @media (min-width: $screen-lg) {
+      @include grid-default($i);
+    }
+  }
+
+  .grid-tpl-xl-#{$i} {
+    @media (min-width: $screen-xl) {
+      @include grid-default($i);
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  .grid-tpl-col-#{$i} {
+    grid-column: auto/span $i;
+  }
+
+  .grid-tpl-col-md-#{$i} {
+    @media (min-width: $screen-md) {
+      grid-column: auto/span $i;
+    }
+  }
+
+  .grid-tpl-col-lg-#{$i} {
+    @media (min-width: $screen-lg) {
+      grid-column: auto/span $i;
+    }
+  }
+
+  .grid-tpl-col-xl-#{$i} {
+    @media (min-width: $screen-xl) {
+      grid-column: auto/span $i;
+    }
+  }
+}
+
+//@for $i from 1 through 12 {
+//  .grid-tpl-row-#{$i} {
+//    grid-row: auto/span $i;
+//  }
+//
+//  .grid-tpl-row-md-#{$i} {
+//    @media (min-width: $screen-md) {
+//      grid-row: auto/span $i;
+//    }
+//  }
+//
+//  .grid-tpl-row-lg-#{$i} {
+//    @media (min-width: $screen-lg) {
+//      grid-row: auto/span $i;
+//    }
+//  }
+//
+//  .grid-tpl-row-xl-#{$i} {
+//    @media (min-width: $screen-xl) {
+//      grid-row: auto/span $i;
+//    }
+//  }
+//}
